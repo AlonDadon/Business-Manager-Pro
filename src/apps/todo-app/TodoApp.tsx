@@ -1,31 +1,45 @@
 import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../service/customHooks";
+import { loadTodos, removeTodo, saveTodo } from "../../store/todo/actions/todo.actions";
+import { TodoList } from "./cmps/TodoList";
+import { ITodo,Store } from "../../store/todo/types"
 
-import { ITodo } from "./todoInterface"
 
 export const TodoApp: FC = () => {
     const [todo, handleChange] = useForm({
-        task: '',
+        txt: '',
         deadline: '',
         importance: 0
     }, () => console.log('cb'))
+    const todos  = useSelector((state:Store) => state.todos)
+    const dispatch = useDispatch()
 
-    const addTodo = (todo: ITodo) => {
-        todo._id = 't' + Date.now() % 1000
-    }
+
     useEffect(() => {
-        console.log(todo);
-    }, [todo])
+       dispatch(loadTodos());
+    }, [])
+    
+    useEffect(() => {
+    console.log('todos has ben changeddddddddd',todos);
+    }, [todos])
 
-    const { task, deadline, importance } = todo
+    const addTodo = () =>{  
+        dispatch(saveTodo(todo))
+    }
+    const deleteTodo = (todoId:string) =>{  
+        dispatch(removeTodo(todoId))
+    }
+
+    const { txt, deadline, importance } = todo
     return (
         <section className="todo-app ">
-            <div className="flex column justify-center align-center">
+            <div className="main-todo flex column justify-center align-center">
                 <h1>todo app</h1>
-                <form className="input-container ">
+                <form className="form-todo input-container " >
                     <input type="text"
-                        placeholder="task" name="task"
-                        onChange={handleChange} value={task} />
+                        placeholder="txt" name="txt"
+                        onChange={handleChange} value={txt} />
                     <input type="number" placeholder="importance"
                         name="importance" onChange={handleChange}
                         value={importance} />
@@ -34,9 +48,9 @@ export const TodoApp: FC = () => {
                         value={deadline} />
 
                 </form>
-                <button className="btn">Add Task</button>
+                <button className="btn" onClick={()=> addTodo()}>Add txt</button>
             </div>
-            <div className="todo-list"></div>
+            <TodoList todos={todos} deleteTodo={deleteTodo} />
         </section>
     )
 }
