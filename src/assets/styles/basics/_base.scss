@@ -5,6 +5,7 @@
 body {
     // font-size: rem(12px);
     margin: 0;
+    padding: 0;
     background-color: gray;
     color: darkblue;
 }
@@ -17,11 +18,16 @@ h5,
 h6 {
     font-family: fantasy;
 }
-
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
 img {
     width: 100%;
 }
-.app{
+.app {
     width: 100vw;
     height: 100vh;
 }
