@@ -5,7 +5,6 @@ import { loadTodos, removeTodo, saveTodo } from "../../store/todo/actions/todo.a
 import { TodoList } from "./cmps/TodoList";
 import { ITodo,Store } from "../../store/todo/types"
 
-
 export const TodoApp: FC = () => {
     const [todo, handleChange] = useForm({
         txt: '',
@@ -48,9 +47,9 @@ export const TodoApp: FC = () => {
                         value={deadline} />
 
                 </form>
-                <button className="btn" onClick={()=> addTodo()}>Add txt</button>
+                <button className="btn" onClick={()=> addTodo()}>Add</button>
             </div>
-            <TodoList todos={todos} deleteTodo={deleteTodo} />
+            <TodoList className="dodo" todos={todos} deleteTodo={deleteTodo} />
         </section>
     )
-}
+}   
