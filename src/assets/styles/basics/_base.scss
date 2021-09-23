@@ -10,6 +10,16 @@ body {
     color: darkblue;
 }
 
+.app-dark{
+    color:white;
+    background-color:black;
+}
+
+.app-light{
+    color:black;
+    background-color:white;
+}
+
 h1,
 h2,
 h3,
@@ -23,6 +33,7 @@ li {
 }
 a {
     text-decoration: none;
+    color: inherit;
 }
 img {
     width: 100%;
