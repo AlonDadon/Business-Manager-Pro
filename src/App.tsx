@@ -2,18 +2,18 @@ import React, { FC, useState } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import { Home } from './pages/Home';
 import { TodoApp } from './apps/todo-app/TodoApp';
-import { Header } from './cmps/Header';
+import { Header } from './cmps/header/Header';
 const App: FC = () => {
   const [isDarkMode, setDarkMode] = useState(false)
 
-  const toogleDarkMode = () => {
+  const toggleDarkMode = () => {
     setDarkMode(!isDarkMode)
   }
 
   return (
-    <div className={isDarkMode ? 'app-dark' : 'app-light'}>
+    <div className={`app ${isDarkMode ? 'app-dark' : 'app-light'}`}>
       <Router>
-        <Header toogleDarkMode={toogleDarkMode}/>
+        <Header toggleDarkMode={toggleDarkMode}/>
         <Switch>
           <Route path="/todo" component={TodoApp} />
           <Route path="/" component={Home} />
