@@ -23,17 +23,17 @@ async function getTodos(): Promise<ITodo[]> {
 async function save(todo: ITodo): Promise<ITodo> {
     if (todo._id) {
         console.log('im IDDDDD:', todo._id);
-        
+
         return storageService.put('todo', todo)
     } else {
-        let newTodo = {...todo}
+        let newTodo = { ...todo }
         newTodo.done = false
         return storageService.post(`todo`, newTodo)
     }
 }
-async function remove(todoId:string) {
-        return storageService.remove('todo', todoId)
-    }
+async function remove(todoId: string) {
+    return storageService.remove('todo', todoId)
+}
 
 // async function getTodos() {
 //     let todos = await storageService.query('todo')
@@ -56,29 +56,37 @@ async function remove(todoId:string) {
 
 
 function _createTodos() {
-    return [{
-        _id: 't' + Date.now() % 1000,
-        txt: 'first todo',
-        deadline: new Date(Date.now()),
-        importance: 2,
-        done: false
-    },
-    {
-        _id: 'ta' + Date.now() % 1000,
-        txt: 'second todo',
-        deadline: new Date(Date.now() + 10000),
-        importance: 3,
-        done: false
-    },
-    {
-        _id: 'tn' + Date.now() % 1000,
-        txt: 'third todo',
-        deadline: new Date(Date.now() + 50000),
-        importance: 1,
-        done: true
-
-    }
-
+    return [
+        {
+            _id: 't' + Date.now() % 1000,
+            title: 'first todo',
+            txt: 'first todo text text text',
+            deadline: new Date(Date.now()),
+            createAt: new Date(Date.now()),
+            doneAt: new Date(Date.now()),
+            importance: 2, // 1-3 style ramzor
+            isDone: false
+        },
+        {
+            _id: 't' + Date.now() % 1000,
+            title: 'first todo',
+            txt: 'first todo text text text',
+            deadline: new Date(Date.now()),
+            createAt: new Date(Date.now()),
+            doneAt: new Date(Date.now()),
+            importance: 2, // 1-3 style ramzor
+            isDone: false
+        },
+        {
+            _id: 't' + Date.now() % 1000,
+            title: 'first todo',
+            txt: 'first todo text text text',
+            deadline: new Date(Date.now()),
+            createAt: new Date(Date.now()),
+            doneAt: new Date(Date.now()),
+            importance: 2, // 1-3 style ramzor
+            isDone: false
+        },
     ]
 }
 

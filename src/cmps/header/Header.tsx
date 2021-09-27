@@ -13,11 +13,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { HeaderNav } from './HeaderNav';
-import { Badge, Container } from '@mui/material';
+import { Badge, Button, Container } from '@mui/material';
 import { HeaderMenu } from './HeaderMenu';
 import { HeaderMobileMenu } from './HeaderMobileMenu';
 
 import { Search, SearchIconWrapper, StyledInputBase } from './styles'
+import { Link } from 'react-router-dom';
 
 export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JSX.Element => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -41,6 +42,9 @@ export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JS
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     }
+    const toggleMobileMenu = () => {
+
+    }
 
     const handleMenuClose = (): void => {
         setAnchorEl(null);
@@ -55,7 +59,7 @@ export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JS
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Container maxWidth="md">
+                <Container maxWidth="md" >
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -75,10 +79,13 @@ export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JS
                         <Typography
                             variant="h6"
                             noWrap
-                            component="div"
+                            // component="div"
+                            component={Link} to="/"
+                            
                             sx={{ display: { xs: 'none', sm: 'block' } }}
+                            
                         >
-                            MB
+                            BM
                         </Typography>
                         <Search>
                             <SearchIconWrapper>

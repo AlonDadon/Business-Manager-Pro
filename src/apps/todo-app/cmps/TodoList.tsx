@@ -29,7 +29,9 @@ export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: str
             </div> */}
             {/* <Container maxWidth="md"> */}
 
-            <Grid container spacing={1} rowSpacing={4} columns={{ xs: 4, md: 12 }} >
+            <Grid container spacing={1} rowSpacing={4} columns={{ xs: 4, md: 12 }} direction="row"
+                justifyContent="center"
+                alignItems="center">
                 {todos.map((todo: ITodo) =>
                     <Grid key={todo.txt} item xs={12} sm={6} md={4} >
                         <Item>

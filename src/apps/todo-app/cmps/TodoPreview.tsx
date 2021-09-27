@@ -10,21 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-// export const TodoPreview: FC<{ todo: ITodo, deleteTodo: Function }> = ({ todo, deleteTodo }): JSX.Element => {
-//     return (
-//         <div>
-//             <h3>{todo.txt}<span>{todo.deadline}</span><span>{todo.importance}</span></h3>
-//             <DeleteIcon onClick={() => deleteTodo(todo._id)} className="bb" color="secondary" />
-//         </div>
-//     )
-// }
-
-
-
-// export default function MediaCard() {
 export const TodoPreview: FC<{ todo: ITodo, deleteTodo: Function }> = ({ todo, deleteTodo }): JSX.Element => {
-
-
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -34,7 +20,7 @@ export const TodoPreview: FC<{ todo: ITodo, deleteTodo: Function }> = ({ todo, d
                 alt="green iguana"
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h6" component="div">
                     {todo.txt}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -45,6 +31,7 @@ export const TodoPreview: FC<{ todo: ITodo, deleteTodo: Function }> = ({ todo, d
             <CardActions>
                 <Button size="small">Edit</Button>
                 <Button size="small">View</Button>
+                <DeleteIcon onClick={() => deleteTodo(todo._id)} className="bb" color="secondary" />
             </CardActions>
         </Card>
     );

@@ -6,6 +6,7 @@ import { TodoList } from "./cmps/TodoList";
 import { ITodo, Store } from "../../store/todo/types"
 
 import { Container } from '@mui/material';
+import { TodoStats } from "./cmps/TodoStats";
 
 export const TodoApp: FC = () => {
     const [todo, handleChange] = useForm({
@@ -52,7 +53,9 @@ export const TodoApp: FC = () => {
                     </form>
                     <button className="btn" onClick={() => addTodo()}>Add</button>
                 </div>
+                <TodoStats />
                 <TodoList className="dodo" todos={todos} deleteTodo={deleteTodo} />
+
             </Container >
         </section>
     )
