@@ -15,6 +15,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Dehaze } from "@mui/icons-material";
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -48,74 +50,44 @@ export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: str
     console.log('im Listtttttttt', todos);
 
     return (
-        <Grid container spacing={1} rowSpacing={4} columns={{ xs: 1, md: 2 }} direction="row"
-            justifyContent="center"
-            alignItems="center">
-            <Grid item xs={1} sm={2} md={2} >
-                <Item>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Tasks for today</TableCell>
-                                    <TableCell align="center" sx={{}}>Deadline</TableCell>
-                                    <TableCell align="center" >Actions</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="center">{row.calories}</TableCell>
-                                        <TableCell align="center">
-                                            <Button><DeleteIcon /></Button>
-                                            <Button><DoneOutlineIcon /></Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Item>
-            </Grid>
-            <Grid item xs={1} sm={2} md={2} >
-                <Item>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Tasks for today</TableCell>
-                                    <TableCell align="center" sx={{}}>Deadline</TableCell>
-                                    <TableCell align="center" >Actions</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="center">{row.calories}</TableCell>
-                                        <TableCell align="center">
-                                            <Button><DeleteIcon /></Button>
-                                            <Button><DoneOutlineIcon /></Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Item>
-            </Grid>
-        </Grid>
+        // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
+        //     justifyContent="center"
+        //     alignItems="center">
+        //     <Grid item xs={4} md={8} >
+        //         <Item>
+        <TableContainer component={Paper}>
+            <Table aria-label="simple table"
+            >
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Tasks for today</TableCell>
+                        <TableCell align="center" sx={{}}>Deadline</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map((row) => (
+                        <TableRow
+                            draggable
+                            key={row.name}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {row.name}
+                            </TableCell>
+                            <TableCell align="center">{row.calories}</TableCell>
+                            <TableCell align="center">
+                                {/* <Button><DeleteIcon /></Button>
+                                            <Button><DoneOutlineIcon /></Button> */}
+                                <Dehaze />
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+        //         </Item>
+        //     </Grid>
+        // </Grid>
     );
 }
 

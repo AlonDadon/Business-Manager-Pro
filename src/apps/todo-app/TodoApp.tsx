@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../service/customHooks";
 import { loadTodos, removeTodo, saveTodo } from "../../store/todo/actions/todo.actions";
@@ -7,6 +7,8 @@ import { ITodo, Store } from "../../store/todo/types"
 
 import { Container } from '@mui/material';
 import { TodoStats } from "./cmps/TodoStats";
+import { TodoDragAndDropActions } from "./cmps/TodoDragAndDropActions";
+import { TodoEdit } from "./cmps/TodoEdit";
 
 export const TodoApp: FC = () => {
     const [todo, handleChange] = useForm({
@@ -16,6 +18,7 @@ export const TodoApp: FC = () => {
     }, () => console.log('cb'))
     const todos = useSelector((state: Store) => state.todos)
     const dispatch = useDispatch()
+    const [openEditModal, setOpenEditModal] = useState<Boolean>(false)
 
 
     useEffect(() => {
@@ -33,13 +36,16 @@ export const TodoApp: FC = () => {
         dispatch(removeTodo(todoId))
     }
 
+    const handleOpenEdit = () => {
+
+    }
     const { txt, deadline, importance } = todo
     return (
         <section className="todo-app ">
             <Container maxWidth="md">
                 <div className="main-todo flex column justify-center align-center">
-                    <h1>todo app</h1>
-                    <form className="form-todo input-container " >
+                    {/* <h1>todo app</h1> */}
+                    {/* <form className="form-todo input-container " >
                         <input type="text"
                             placeholder="txt" name="txt"
                             onChange={handleChange} value={txt} />
@@ -50,12 +56,13 @@ export const TodoApp: FC = () => {
                             name="deadline" onChange={handleChange}
                             value={deadline} />
 
-                    </form>
-                    <button className="btn" onClick={() => addTodo()}>Add</button>
+                    </form> */}
+                    {/* <button className="btn" onClick={() => addTodo()}>Add</button> */}
                 </div>
                 <TodoStats />
+                <TodoDragAndDropActions handleOpenEdit={handleOpenEdit} />
                 <TodoList className="dodo" todos={todos} deleteTodo={deleteTodo} />
-
+                <TodoEdit/>
             </Container >
         </section>
     )

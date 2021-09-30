@@ -58,7 +58,12 @@ export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JS
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{
+                color: '#1d1c1c',
+                borderBottom: '1px solid #cccbcb',
+                backgroundColor:'white',
+                boxShadow:'none'
+            }}>
                 <Container maxWidth="md" >
                     <Toolbar>
                         <IconButton
@@ -81,9 +86,9 @@ export const Header: FC<{ toggleDarkMode: Function }> = ({ toggleDarkMode }): JS
                             noWrap
                             // component="div"
                             component={Link} to="/"
-                            
+
                             sx={{ display: { xs: 'none', sm: 'block' } }}
-                            
+
                         >
                             BM
                         </Typography>
