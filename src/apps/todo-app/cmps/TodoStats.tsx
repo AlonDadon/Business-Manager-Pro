@@ -9,31 +9,25 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     height: "100%",
     paddingTop: 5,
-    background: 'none',
-    'box-shadow': 'none'
-    // backgroundColor: "#fff",
-    // boxhadow
+    backgroundColor: "#fff"
 }));
 
 export const TodoStats = () => {
-    
     return (
         <section>
-            <Grid container spacing={1} rowSpacing={1} columns={{ xs: 8, md: 16 }} direction="row"
+            <Grid container spacing={1} rowSpacing={1}  columns={{ xs: 8, md: 16 }} direction="row"
                 justifyContent="center"
                 alignItems="center"
-                sx={{ mb: 2, mt: 2 }}>
+                sx={{ mb: 2 ,mt:2}}>
                 <Grid item xs={4} sm={2} md={4} >
                     <Item>
                         <Card>
                             <CardContent>
                                 <Typography variant="h5" component="div">
                                     Task count
-
                                 </Typography>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Word of the Day
-
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -45,7 +39,6 @@ export const TodoStats = () => {
                             <CardContent>
                                 <Typography variant="h5" component="div">
                                     Task count
-
                                 </Typography>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Word of the Day
@@ -84,7 +77,7 @@ export const TodoStats = () => {
                     </Item>
                 </Grid>
             </Grid>
-            <hr />
-        </section >
+
+        </section>
     )
 }
