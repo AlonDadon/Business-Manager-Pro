@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ITodo } from '../../../store/todo/types'
+import { ITodo } from '../../../store/todo/interfaceTodo'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import React from 'react';

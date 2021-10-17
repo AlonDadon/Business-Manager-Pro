@@ -1,13 +1,20 @@
 export interface ITodo {
   _id?: string,
+  title: string,
   txt: string,
-  done: boolean,
+  isDone: boolean,
   deadline: Date,
   importance: Number
 }
 
 export interface Store {
   todos: ITodo[],
+}
+
+export interface todoListProps {
+  todos: ITodo[],
+  deleteTodo: Function,
+  className: string
 }
 
 const SET_TODOS = "SET_TODOS";

@@ -1,7 +1,7 @@
 import { todoService } from '../../../apps/todo-app/services/todo.service'
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
-import { ITodo, Store, ActionTypes, } from "../types";
+import { ITodo, Store, ActionTypes, } from "../interfaceTodo";
 
 // export function loadTodos() {
 //     return async dispatch => {

@@ -1,4 +1,4 @@
-import { ActionTypes, ITodo, Store } from "../types"
+import { ActionTypes, ITodo, Store } from "../interfaceTodo"
 
 //can be changed to whatever name.
 

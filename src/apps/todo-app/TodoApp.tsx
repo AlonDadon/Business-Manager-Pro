@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../service/customHooks";
 import { loadTodos, removeTodo, saveTodo } from "../../store/todo/actions/todo.actions";
 import { TodoList } from "./cmps/TodoList";
-import { ITodo, Store } from "../../store/todo/types"
+import { ITodo, Store } from "../../store/todo/interfaceTodo"
 
 import { Container } from '@mui/material';
 import { TodoStats } from "./cmps/TodoStats";

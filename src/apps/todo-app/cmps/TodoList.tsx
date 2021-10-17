@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ITodo } from '../../../store/todo/types'
+import { todoListProps } from '../../../store/todo/interfaceTodo'
 import { TodoPreview } from './TodoPreview';
 
 import { styled } from '@mui/material/styles';
@@ -28,27 +28,13 @@ const Item = styled(Paper)(({ theme }) => ({
     paddingTop: 5,
     backgroundColor: "#fff"
 }));
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return { name, calories, fat, carbs, protein };
+
+
+const onDragStart = (ev:any, id:string|undefined) => {
+    ev.dataTransfer.setData("id", id)
 }
 
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9)
-]
-
-export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: string }> = ({ todos, deleteTodo, className }): JSX.Element => {
-    console.log('im Listtttttttt', todos);
-
+export const TodoList: FC<todoListProps> = ({ todos, deleteTodo, className }): JSX.Element => {
     return (
         // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
         //     justifyContent="center"
@@ -65,20 +51,21 @@ export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: str
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
+                    {todos.map((todo) => (
                         <TableRow
                             draggable
-                            key={row.name}
+                            onDragStart={(ev) => onDragStart(ev, todo._id)}
+                            key={todo._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {todo.title}
                             </TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
+                            <TableCell align="center">{todo.isDone && 'done'}</TableCell>
                             <TableCell align="center">
                                 {/* <Button><DeleteIcon /></Button>
                                             <Button><DoneOutlineIcon /></Button> */}
-                                <Dehaze />
+                                    <Dehaze />
                             </TableCell>
                         </TableRow>
                     ))}

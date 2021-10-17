@@ -5,6 +5,8 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+import { todoService } from '../services/todo.service';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,6 +21,22 @@ const Item = styled(Paper)(({ theme }) => ({
     // backgroundColor: "#fff",
     // boxhadow
 }));
+
+const onDragOver = (ev) => {
+    ev.preventDefault();
+}
+
+const onDropDelete = (ev) => {
+   const todoId = ev.dataTransfer.getData('id')
+    todoService.remove(todoId)
+}
+const onDropToggleIsDone = async (ev) => {
+   const todoId = ev.dataTransfer.getData('id')
+   const todo = await todoService.getTodoById(todoId)
+   todo.isDone = !todo.isDone   
+    todoService.save(todo)
+}
+
 
 export const TodoDragAndDropActions = ({handleOpenEdit}) => {
 
@@ -44,7 +62,8 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
                 </Grid>
                 <Grid item xs={1} >
                     <Item>
-                        <Card>
+                        <Card onDragOver={(ev) => onDragOver(ev)}
+                        onDrop={(ev) => onDropToggleIsDone(ev)}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
                                 <DoneOutlineIcon sx={{ width: '50px', height: '50px' }}/>
@@ -60,7 +79,8 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
 
                 <Grid item xs={1} >
                     <Item>
-                        <Card>
+                        <Card onDragOver={(ev) => onDragOver(ev)}
+                        onDrop={(ev) => onDropDelete(ev)}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
                                     <DeleteOutlinedIcon sx={{ width: '50px', height: '50px' }} />

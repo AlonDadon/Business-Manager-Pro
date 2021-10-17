@@ -1,11 +1,11 @@
 
 import { localService } from '../../../service/storageService.js'
 import { storageService } from '../../../service/async-Storage.service'
-import { ITodo } from '../../../store/todo/types'
+import { ITodo } from '../../../store/todo/interfaceTodo'
 // import { httpService } from './http.service'
 export const todoService = {
     getTodos,
-    // getById,
+    getTodoById,
     remove,
     save,
     // addReview,
@@ -20,6 +20,10 @@ async function getTodos(): Promise<ITodo[]> {
     }
     return todos
 }
+async function getTodoById(todoId: string): Promise<ITodo> {
+    let todo = await storageService.get('todo', todoId)
+    return todo
+}
 async function save(todo: ITodo): Promise<ITodo> {
     if (todo._id) {
         console.log('im IDDDDD:', todo._id);
@@ -27,11 +31,13 @@ async function save(todo: ITodo): Promise<ITodo> {
         return storageService.put('todo', todo)
     } else {
         let newTodo = { ...todo }
-        newTodo.done = false
+        newTodo.isDone = false
         return storageService.post(`todo`, newTodo)
     }
 }
 async function remove(todoId: string) {
+    console.log({todoId});
+    
     return storageService.remove('todo', todoId)
 }
 
@@ -58,7 +64,7 @@ async function remove(todoId: string) {
 function _createTodos() {
     return [
         {
-            _id: 't' + Date.now() % 1000,
+            _id: 't' + Date.now() % 100,
             title: 'first todo',
             txt: 'first todo text text text',
             deadline: new Date(Date.now()),
@@ -78,7 +84,7 @@ function _createTodos() {
             isDone: false
         },
         {
-            _id: 't' + Date.now() % 1000,
+            _id: 't' + Date.now() % 10,
             title: 'first todo',
             txt: 'first todo text text text',
             deadline: new Date(Date.now()),
