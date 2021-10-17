@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { DragEventHandler, FC } from 'react'
 import { ITodo } from '../../../store/todo/types'
 import { TodoPreview } from './TodoPreview';
 
@@ -49,6 +49,10 @@ const rows = [
 export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: string }> = ({ todos, deleteTodo, className }): JSX.Element => {
     console.log('im Listtttttttt', todos);
 
+    const handleDragStart = (ev: any): void => {
+        console.log('start', ev);
+    }
+
     return (
         // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
         //     justifyContent="center"
@@ -66,21 +70,25 @@ export const TodoList: FC<{ todos: ITodo[], deleteTodo: Function, className: str
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
-                        <TableRow
-                            draggable
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {row.name}
-                            </TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">
-                                {/* <Button><DeleteIcon /></Button>
+                        // <div  >
+
+                            <TableRow
+                                draggable onDragStart={handleDragStart}
+                                // draggable
+                                key={row.name}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell align="center">{row.calories}</TableCell>
+                                <TableCell align="center">
+                                    {/* <Button><DeleteIcon /></Button>
                                             <Button><DoneOutlineIcon /></Button> */}
-                                <Dehaze />
-                            </TableCell>
-                        </TableRow>
+                                    <Dehaze />
+                                </TableCell>
+                            </TableRow>
+                        // </div>
                     ))}
                 </TableBody>
             </Table>

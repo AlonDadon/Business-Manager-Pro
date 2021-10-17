@@ -60,33 +60,40 @@ function _createTodos() {
         {
             _id: 't' + Date.now() % 1000,
             title: 'first todo',
-            txt: 'first todo text text text',
+            desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),
             doneAt: new Date(Date.now()),
             importance: 2, // 1-3 style ramzor
-            isDone: false
+            isDone: false,
+            startTime: new Date(Date.now()),
+            reminder: new Date(Date.now())
         },
         {
             _id: 't' + Date.now() % 1000,
             title: 'first todo',
-            txt: 'first todo text text text',
+            desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),
             doneAt: new Date(Date.now()),
             importance: 2, // 1-3 style ramzor
-            isDone: false
+            isDone: false,
+            startTime: new Date(Date.now()),
+            reminder: new Date(Date.now())
         },
         {
             _id: 't' + Date.now() % 1000,
             title: 'first todo',
-            txt: 'first todo text text text',
+            desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),
             doneAt: new Date(Date.now()),
             importance: 2, // 1-3 style ramzor
-            isDone: false
+            isDone: false,
+            startTime: new Date(Date.now()),
+            reminder: new Date(Date.now())
         },
+
     ]
 }
 

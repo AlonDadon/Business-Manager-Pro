@@ -1,8 +1,11 @@
 export interface ITodo {
   _id?: string,
-  txt: string,
+  title: string,
+  desc: string,
   done: boolean,
+  startTime: Date,
   deadline: Date,
+  reminder: Date,
   importance: Number
 }
 

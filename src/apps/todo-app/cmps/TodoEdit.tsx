@@ -10,6 +10,7 @@ import { Stack, TextField } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import { TxtInput } from './todo-edit/TxtInput';
 import { DateTimeInput } from './todo-edit/DateTimeInput';
+import { FormByStep } from './todo-edit/FormByStep';
 
 // const boxStyle = {
 //     position: 'absolute',
@@ -26,6 +27,7 @@ import { DateTimeInput } from './todo-edit/DateTimeInput';
 
 export const TodoEdit: FC<{ isOpenEditModal: any, toggleIsOpenEditModal: Function, addTodo: Function }>
     = ({ isOpenEditModal, toggleIsOpenEditModal, addTodo }) => {
+
         const [todo, handleChange] = useForm({
             title: '',
             desc: '',
@@ -34,38 +36,11 @@ export const TodoEdit: FC<{ isOpenEditModal: any, toggleIsOpenEditModal: Functio
             reminder: '',
             importance: 0,
         }, () => console.log('cb'))
+
         const [step, setStep] = useState(1)
+        useEffect(() => console.log(step), [step])
 
-        // useEffect(() => {
-        //     console.log(title)
-        // }, [todo])
-        const { desc, deadline, importance, title } = todo
-
-        const FormEditByStep = (props: { step: Number, handleChange: Function }) => {
-            switch (step) {
-                case 1: return (
-                    <Box>
-                        <h5>Step 1 what i went to do</h5>
-                        <TxtInput handleChange={handleChange} title={title} desc={desc} />
-                    </Box>
-                )
-                case 2: return (
-                    <Box>
-                        {/* <div>step2 when I want to do </div> */}
-                        <DateTimeInput handleChange={handleChange} title={'step2 when I want to do'} />
-                    </Box>
-                )
-                case 3: return (
-                    <div>step3 What is the deadline for completing the task</div>
-                )
-                case 4: return (
-                    <div>step4 Adding a reminder and saving the task</div>
-                )
-                default:
-                    return <div>loading...</div>
-            }
-        }
-
+        const { title, desc, startTime, deadline, reminder, importance } = todo
         return (
             <div>
                 {/* <Button onClick={handleOpen}>Open modal</Button> */}
@@ -92,11 +67,21 @@ export const TodoEdit: FC<{ isOpenEditModal: any, toggleIsOpenEditModal: Functio
                             boxShadow: 24,
                             p: 4,
                         }}>
-                            <Typography id="transition-modal-title" variant="h6" component="h2">
-                                Edit modal
-                            </Typography>
 
-                            <FormEditByStep handleChange={handleChange} step={step} />
+
+
+                            <FormByStep
+                                toggleIsOpenEditModal={toggleIsOpenEditModal}
+                                title={title}
+                                desc={desc}
+                                handleChange={handleChange}
+                                step={step}
+                                setStep={setStep}
+                                deadline={deadline}
+                                startTime={startTime}
+                                addTodo={addTodo}
+                                todo={todo}
+                            />
 
                             {/* <TextField
                                 id="todo-title"

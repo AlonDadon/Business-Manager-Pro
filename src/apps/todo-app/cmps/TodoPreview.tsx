@@ -21,7 +21,7 @@ export const TodoPreview: FC<{ todo: ITodo, deleteTodo: Function }> = ({ todo, d
             />
             <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                    {todo.txt}
+                    {todo.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     Lizards are a widespread group of squamate reptiles, with over 6,000
