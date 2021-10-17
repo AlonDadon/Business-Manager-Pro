@@ -36,9 +36,8 @@ async function save(todo: ITodo): Promise<ITodo> {
     }
 }
 async function remove(todoId: string) {
-    console.log({todoId});
-    
-    return storageService.remove('todo', todoId)
+    console.log({ todoId });
+    return await storageService.remove('todo', todoId)
 }
 
 // async function getTodos() {

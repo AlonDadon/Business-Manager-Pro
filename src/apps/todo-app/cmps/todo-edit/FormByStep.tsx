@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import { ChangeEventHandler, FC } from "react"
-import { ITodo } from "../../../../store/todo/types"
+import { ITodo } from "../../../../store/todo/interfaceTodo"
 import { DateTimeInput } from "./DateTimeInput"
 import { TxtInput } from "./TxtInput"
 

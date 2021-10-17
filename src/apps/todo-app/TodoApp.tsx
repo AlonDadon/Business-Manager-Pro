@@ -9,15 +9,17 @@ import { Container } from '@mui/material';
 import { TodoStats } from "./cmps/TodoStats";
 import { TodoDragAndDropActions } from "./cmps/TodoDragAndDropActions";
 import { TodoEdit } from "./cmps/TodoEdit";
+import { todoService } from "./services/todo.service";
 
 export const TodoApp: FC = () => {
     const todos = useSelector((state: Store) => state.todos)
     const dispatch = useDispatch()
     const [isOpenEditModal, setIsOpenEditModal] = useState<Boolean>(false)
-
+    const [isDrag, setIsDrag] = useState(false)
+    const [TodoDragIdx, setTodoDragIdx] = useState(0)
 
     useEffect(() => {
-        dispatch(loadTodos());
+        dispatch(loadTodos())
     }, [])
 
     useEffect(() => {
@@ -35,13 +37,43 @@ export const TodoApp: FC = () => {
         console.log(isOpenEditModal);
         setIsOpenEditModal(isOpenEditModal)
     }
+    const onDragOver = (ev: any) => {
+        ev.preventDefault();
+    }
+
+    const onDropDelete = (ev: any) => {
+        const todoId = ev.dataTransfer.getData('id')
+        // todoService.remove(todoId)
+        deleteTodo(todoId)
+    }
+
+    const onDropToggleIsDone = async (ev: any) => {
+        const todoId = ev.dataTransfer.getData('id')
+        const todo = await todoService.getTodoById(todoId)
+        todo.isDone = !todo.isDone
+        todoService.save(todo)
+    }
+
 
     return (
         <section className="todo-app ">
             <Container maxWidth="md">
                 <TodoStats />
-                <TodoDragAndDropActions handleOpenEdit={toggleIsOpenEditModal} />
-                <TodoList className="dodo" todos={todos} deleteTodo={deleteTodo} />
+                <TodoDragAndDropActions
+                    handleOpenEdit={toggleIsOpenEditModal}
+                    onDropToggleIsDone={onDropToggleIsDone}
+                    onDropDelete={onDropDelete}
+                    onDragOver={onDragOver}
+                />
+                <TodoList className="dodo"
+                    todos={todos} deleteTodo={deleteTodo}
+                    setTodoDragIdx={setTodoDragIdx}
+                    TodoDragIdx={TodoDragIdx}
+                    setIsDrag={setIsDrag}
+                    isDrag={isDrag}
+                />
+
+
                 <TodoEdit isOpenEditModal={isOpenEditModal}
                     toggleIsOpenEditModal={toggleIsOpenEditModal}
                     addTodo={addTodo}

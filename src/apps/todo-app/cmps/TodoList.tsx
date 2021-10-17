@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { todoListProps } from '../../../store/todo/interfaceTodo'
-=======
-import React, { DragEventHandler, FC } from 'react'
-import { ITodo } from '../../../store/todo/types'
->>>>>>> 113337cc4e24a450d2b522736e55d867618ca250
 import { TodoPreview } from './TodoPreview';
 
 import { styled } from '@mui/material/styles';
@@ -35,60 +30,66 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-const onDragStart = (ev:any, id:string|undefined) => {
-    ev.dataTransfer.setData("id", id)
-}
 
-<<<<<<< HEAD
-export const TodoList: FC<todoListProps> = ({ todos, deleteTodo, className }): JSX.Element => {
-=======
-    const handleDragStart = (ev: any): void => {
-        console.log('start', ev);
-    }
+export const TodoList: FC<todoListProps>
+    = ({ todos, deleteTodo, className, setTodoDragIdx, TodoDragIdx, setIsDrag, isDrag }): JSX.Element => {
 
->>>>>>> 113337cc4e24a450d2b522736e55d867618ca250
-    return (
-        // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
-        //     justifyContent="center"
-        //     alignItems="center">
-        //     <Grid item xs={4} md={8} >
-        //         <Item>
-        <TableContainer component={Paper}>
-            <Table aria-label="simple table"
-            >
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Tasks for today</TableCell>
-                        <TableCell align="center" sx={{}}>Deadline</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {todos.map((todo) => (
-                        <TableRow
-                            draggable
-                            onDragStart={(ev) => onDragStart(ev, todo._id)}
-                            key={todo._id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {todo.title}
-                            </TableCell>
-                            <TableCell align="center">{todo.isDone && 'done'}</TableCell>
-                            <TableCell align="center">
-                                {/* <Button><DeleteIcon /></Button>
+        const onDragStart = (ev: any, id: string | undefined, todoIdx: number) => {
+            setTodoDragIdx(todoIdx)
+            setIsDrag(true)
+            ev.dataTransfer.setData("id", id)
+        }
+        const onDragEnd = (ev: any,) => {
+            setIsDrag(false)
+        }
+        const getRowStyle = (todoIdx: number) => {
+            return { background: (isDrag && TodoDragIdx === todoIdx) ? "#badcf7" : "" }
+        }
+
+        return (
+            // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
+            //     justifyContent="center"
+            //     alignItems="center">
+            //     <Grid item xs={4} md={8} >
+            //         <Item>
+            <TableContainer component={Paper}>
+                <Table aria-label="simple table"
+                >
+                    <TableHead>
+                        <TableRow >
+                            <TableCell>Tasks for today</TableCell>
+                            <TableCell align="center" sx={{}}>Deadline</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {todos.map((todo, todoIdx) => (
+                            <TableRow
+                                style={getRowStyle(todoIdx)}
+                                draggable
+                                onDragStart={(ev) => onDragStart(ev, todo._id, todoIdx)}
+                                onDragEnd={(ev) => onDragEnd(ev)}
+                                key={todo._id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {todo.title}
+                                </TableCell>
+                                <TableCell align="center">{todo.isDone && 'done'}</TableCell>
+                                <TableCell align="center">
+                                    {/* <Button><DeleteIcon /></Button>
                                             <Button><DoneOutlineIcon /></Button> */}
                                     <Dehaze />
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-        //         </Item>
-        //     </Grid>
-        // </Grid>
-    );
-}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer >
+            //         </Item>
+            //     </Grid>
+            // </Grid>
+        );
+    }
 
 
 // <div>

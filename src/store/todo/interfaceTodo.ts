@@ -17,8 +17,20 @@ export interface Store {
 export interface todoListProps {
   todos: ITodo[],
   deleteTodo: Function,
-  className: string
+  className: string,
+  setTodoDragIdx: Function,
+  TodoDragIdx: number,
+  setIsDrag: Function,
+  isDrag: Boolean,
 }
+
+export interface TodoDragAndDropProps {
+  handleOpenEdit: Function,
+  onDragOver: Function,
+  onDropToggleIsDone: Function,
+  onDropDelete: Function
+}
+
 
 const SET_TODOS = "SET_TODOS";
 const ADD_TODO = "ADD_TODO";

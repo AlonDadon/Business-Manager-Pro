@@ -38,6 +38,8 @@ export const loadTodos =
     // const resp = await fetch(url);
     try {
       const todos: ITodo[] = await todoService.getTodos();
+      console.log('new todos-', todos);
+
       dispatch(setTodos(todos));
     } catch (err) {
       console.log('GamesActions: err in saveGame', err)
@@ -63,6 +65,8 @@ export const saveTodo = (todo: ITodo): ThunkAction<void, Store, ITodo, Action<st
 export const removeTodo = (todoId: string): ThunkAction<void, Store, ITodo, Action<string>> => async (dispatch) => {
   try {
     await todoService.remove(todoId)
+    console.log('action', { todoId });
+
     dispatch(deleteTodo(todoId))
   } catch (err) {
     console.log('GameActions: err in removeGame', err)
