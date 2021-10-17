@@ -3,7 +3,10 @@ export interface ITodo {
   title: string,
   txt: string,
   isDone: boolean,
+  desc: string,
+  startTime: Date,
   deadline: Date,
+  reminder: Date,
   importance: Number
 }
 

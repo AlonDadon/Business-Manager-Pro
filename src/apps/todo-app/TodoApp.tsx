@@ -11,14 +11,9 @@ import { TodoDragAndDropActions } from "./cmps/TodoDragAndDropActions";
 import { TodoEdit } from "./cmps/TodoEdit";
 
 export const TodoApp: FC = () => {
-    const [todo, handleChange] = useForm({
-        txt: '',
-        deadline: '',
-        importance: 0
-    }, () => console.log('cb'))
     const todos = useSelector((state: Store) => state.todos)
     const dispatch = useDispatch()
-    const [openEditModal, setOpenEditModal] = useState<Boolean>(false)
+    const [isOpenEditModal, setIsOpenEditModal] = useState<Boolean>(false)
 
 
     useEffect(() => {
@@ -26,43 +21,31 @@ export const TodoApp: FC = () => {
     }, [])
 
     useEffect(() => {
-        console.log('todos has ben changeddddddddd', todos);
+        console.log('todo app todos', todos);
     }, [todos])
 
-    const addTodo = () => {
+    const addTodo = (todo: ITodo) => {
         dispatch(saveTodo(todo))
     }
     const deleteTodo = (todoId: string) => {
         dispatch(removeTodo(todoId))
     }
 
-    const handleOpenEdit = () => {
-
+    const toggleIsOpenEditModal = (isOpenEditModal: boolean): void => {
+        console.log(isOpenEditModal);
+        setIsOpenEditModal(isOpenEditModal)
     }
-    const { txt, deadline, importance } = todo
+
     return (
         <section className="todo-app ">
             <Container maxWidth="md">
-                <div className="main-todo flex column justify-center align-center">
-                    {/* <h1>todo app</h1> */}
-                    {/* <form className="form-todo input-container " >
-                        <input type="text"
-                            placeholder="txt" name="txt"
-                            onChange={handleChange} value={txt} />
-                        <input type="number" placeholder="importance"
-                            name="importance" onChange={handleChange}
-                            value={importance} />
-                        <input type="date" placeholder="Deadline(in days)..."
-                            name="deadline" onChange={handleChange}
-                            value={deadline} />
-
-                    </form> */}
-                    {/* <button className="btn" onClick={() => addTodo()}>Add</button> */}
-                </div>
                 <TodoStats />
-                <TodoDragAndDropActions handleOpenEdit={handleOpenEdit} />
+                <TodoDragAndDropActions handleOpenEdit={toggleIsOpenEditModal} />
                 <TodoList className="dodo" todos={todos} deleteTodo={deleteTodo} />
-                <TodoEdit/>
+                <TodoEdit isOpenEditModal={isOpenEditModal}
+                    toggleIsOpenEditModal={toggleIsOpenEditModal}
+                    addTodo={addTodo}
+                />
             </Container >
         </section>
     )

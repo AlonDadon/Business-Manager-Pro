@@ -18,8 +18,6 @@ const Item = styled(Paper)(({ theme }) => ({
     paddingTop: 5,
     background: 'none',
     'box-shadow': 'none'
-    // backgroundColor: "#fff",
-    // boxhadow
 }));
 
 const onDragOver = (ev) => {
@@ -48,12 +46,12 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
                 sx={{ mb: 2, mt: 2 }}>
                 <Grid item xs={1}>
                     <Item>
-                        <Card onClick={() => handleOpenEdit()}>
+                        <Card onClick={() => handleOpenEdit(true)}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
-                                <NoteAddOutlinedIcon sx={{ width: '50px', height: '50px' }}/>
+                                    <NoteAddOutlinedIcon sx={styleIcon} />
                                 </Typography>
-                                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                <Typography sx={{ fontSize: { xs: 14, sm: 14 } }} color="text.secondary" gutterBottom>
                                     Add Note
                                 </Typography>
                             </CardContent>
@@ -66,7 +64,7 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
                         onDrop={(ev) => onDropToggleIsDone(ev)}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
-                                <DoneOutlineIcon sx={{ width: '50px', height: '50px' }}/>
+                                    <DoneOutlineIcon sx={styleIcon} />
 
                                 </Typography>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -83,7 +81,7 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
                         onDrop={(ev) => onDropDelete(ev)}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
-                                    <DeleteOutlinedIcon sx={{ width: '50px', height: '50px' }} />
+                                    <DeleteOutlinedIcon sx={styleIcon} />
 
                                 </Typography>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -98,7 +96,7 @@ export const TodoDragAndDropActions = ({handleOpenEdit}) => {
                         <Card>
                             <CardContent>
                                 <Typography variant="h5" component="div">
-                                    <EventOutlinedIcon sx={{ width: '50px', height: '50px' }} />
+                                    <EventOutlinedIcon sx={styleIcon} />
                                 </Typography>
                                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Delay Task

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { FC } from 'react'
 import { todoListProps } from '../../../store/todo/interfaceTodo'
+=======
+import React, { DragEventHandler, FC } from 'react'
+import { ITodo } from '../../../store/todo/types'
+>>>>>>> 113337cc4e24a450d2b522736e55d867618ca250
 import { TodoPreview } from './TodoPreview';
 
 import { styled } from '@mui/material/styles';
@@ -34,7 +39,14 @@ const onDragStart = (ev:any, id:string|undefined) => {
     ev.dataTransfer.setData("id", id)
 }
 
+<<<<<<< HEAD
 export const TodoList: FC<todoListProps> = ({ todos, deleteTodo, className }): JSX.Element => {
+=======
+    const handleDragStart = (ev: any): void => {
+        console.log('start', ev);
+    }
+
+>>>>>>> 113337cc4e24a450d2b522736e55d867618ca250
     return (
         // <Grid container spacing={1} rowSpacing={4} columns={{ xs:1 }} direction="row"
         //     justifyContent="center"
