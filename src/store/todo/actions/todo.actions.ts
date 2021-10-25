@@ -13,7 +13,7 @@ import { ITodo, Store, ActionTypes, } from "../interfaceTodo";
 //         }
 //     }
 // }
-const setTodos = (todos: ITodo[]): ActionTypes => ({
+const setTodos = (todos: any): ActionTypes => ({
   type: 'SET_TODOS',
   payload: todos,
 });
@@ -37,9 +37,9 @@ export const loadTodos =
   (): ThunkAction<void, Store, unknown, Action<string>> => async (dispatch) => {
     // const resp = await fetch(url);
     try {
-      const todos: ITodo[] = await todoService.getTodos();
-      console.log('new todos-', todos);
-
+      const todos: any = await todoService.getTodos();
+      // const todos: ITodo[] = await todoService.getTodos();
+      // console.log('new todos-', todos);
       dispatch(setTodos(todos));
     } catch (err) {
       console.log('GamesActions: err in saveGame', err)

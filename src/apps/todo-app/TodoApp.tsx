@@ -10,6 +10,7 @@ import { TodoStats } from "./cmps/TodoStats";
 import { TodoDragAndDropActions } from "./cmps/TodoDragAndDropActions";
 import { TodoEdit } from "./cmps/TodoEdit";
 import { todoService } from "./services/todo.service";
+import { TodoListDnd } from "./cmps/TodoListDnd";
 
 export const TodoApp: FC = () => {
     const todos = useSelector((state: Store) => state.todos)
@@ -22,9 +23,9 @@ export const TodoApp: FC = () => {
         dispatch(loadTodos())
     }, [])
 
-    useEffect(() => {
-        console.log('todo app todos', todos);
-    }, [todos])
+    // useEffect(() => {
+    //     console.log('todo app todos', todos);
+    // }, [todos])
 
     const addTodo = (todo: ITodo) => {
         dispatch(saveTodo(todo))
@@ -54,7 +55,7 @@ export const TodoApp: FC = () => {
         todoService.save(todo)
     }
 
-
+    if (!todos) return <div>Loading....</div>
     return (
         <section className="todo-app ">
             <Container maxWidth="md">
@@ -72,7 +73,6 @@ export const TodoApp: FC = () => {
                     setIsDrag={setIsDrag}
                     isDrag={isDrag}
                 />
-
 
                 <TodoEdit isOpenEditModal={isOpenEditModal}
                     toggleIsOpenEditModal={toggleIsOpenEditModal}

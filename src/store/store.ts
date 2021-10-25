@@ -7,7 +7,7 @@ import { todoReducer } from './todo/reducers/todo.reducer'
 
 const store = createStore(
   todoReducer,
-applyMiddleware(thunk)
+  applyMiddleware(thunk)
 )
 export default store
 

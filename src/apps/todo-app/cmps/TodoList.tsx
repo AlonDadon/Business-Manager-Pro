@@ -35,6 +35,10 @@ export const TodoList: FC<todoListProps>
     = ({ todos, deleteTodo, className, setTodoDragIdx, TodoDragIdx, setIsDrag, isDrag }): JSX.Element => {
 
         const onDragStart = (ev: any, id: string | undefined, todoIdx: number) => {
+            // ev.preventDefault()
+            const target = ev.target
+            target.style.cursor = 'grab'
+            target.style.backgroundcolor = 'red'
             setTodoDragIdx(todoIdx)
             setIsDrag(true)
             ev.dataTransfer.setData("id", id)
@@ -43,7 +47,24 @@ export const TodoList: FC<todoListProps>
             setIsDrag(false)
         }
         const getRowStyle = (todoIdx: number) => {
-            return { background: (isDrag && TodoDragIdx === todoIdx) ? "#badcf7" : "" }
+            const isDragging = (isDrag && TodoDragIdx === todoIdx)
+            return {
+                background: (isDragging) ? "#badcf7" : "",
+                // cursor: (isDragging) ? 'grabbing' : 'auto'
+
+            }
+        }
+        const onDragOver = (ev: any) => {
+            console.log(ev);
+            const target = ev.target
+
+            const elBody: any = document.querySelector('body')
+            elBody.style.cursor = 'grab'
+
+
+
+            // target.style.cursor = 'grab'
+            // target.style.backgroundcolor = 'red'
         }
 
         return (
@@ -61,16 +82,19 @@ export const TodoList: FC<todoListProps>
                             <TableCell align="center" sx={{}}>Deadline</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+
+                    <TableBody >
                         {todos.map((todo, todoIdx) => (
                             <TableRow
                                 style={getRowStyle(todoIdx)}
                                 draggable
                                 onDragStart={(ev) => onDragStart(ev, todo._id, todoIdx)}
                                 onDragEnd={(ev) => onDragEnd(ev)}
+                                onDragOver={(ev) => onDragOver(ev)}
                                 key={todo._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
+
                                 <TableCell component="th" scope="row">
                                     {todo.title}
                                 </TableCell>

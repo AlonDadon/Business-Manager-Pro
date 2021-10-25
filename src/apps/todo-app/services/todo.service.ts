@@ -2,6 +2,7 @@
 import { localService } from '../../../service/storageService.js'
 import { storageService } from '../../../service/async-Storage.service'
 import { ITodo } from '../../../store/todo/interfaceTodo'
+import { utilService } from '../../../service/util.service.js'
 // import { httpService } from './http.service'
 export const todoService = {
     getTodos,
@@ -11,15 +12,24 @@ export const todoService = {
     // addReview,
     // getEmptyGame
 }
-
-async function getTodos(): Promise<ITodo[]> {
+async function getTodos(): Promise<any> {
+    // async function getTodos(): Promise<ITodo[]> {
     let todos = await storageService.query('todo')
     if (!todos || !todos.length) {
-        todos = _createTodos()
+        let todos = _createTodoList()
         localService.saveToStorage('todo', todos)
     }
     return todos
 }
+// async function getTodos(): Promise<ITodo[]> {
+//     let todos = await storageService.query('todo')
+//     // if (!todos || !todos.length) {
+//     if (!todos) {
+//         todos = _createTodos()
+//         localService.saveToStorage('todo', todos)
+//     }
+//     return todos
+// }
 async function getTodoById(todoId: string): Promise<ITodo> {
     let todo = await storageService.get('todo', todoId)
     return todo
@@ -59,11 +69,36 @@ async function remove(todoId: string) {
 //         return game1.title.localeCompare(game2.title)
 //     })
 
+function _createTodoList() {
+    return {
+        lists: {
+            'list-1': {
+                id: utilService.makeId(),
+                title: 'To Do',
+                todos: _createTodos()
+            },
+            // 'list-2': {
+            //     id: utilService.makeId(),
+            //     title: 'Doing',
+            //     todos: _createTodos()
+            // },
+            // 'list-3': {
+            //     id: utilService.makeId(),
+            //     title: 'Later',
+            //     todos: _createTodos()
+            // },
+        },
+        listIds: ['list-1']
+
+    }
+
+}
+
 
 function _createTodos() {
     return [
         {
-            _id: 't' + Date.now() % 100,
+            _id: utilService.makeId(),
             title: 'first todo',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),
@@ -75,7 +110,7 @@ function _createTodos() {
             reminder: new Date(Date.now())
         },
         {
-            _id: 't' + Date.now() % 1000,
+            _id: utilService.makeId(),
             title: 'first todo',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),
@@ -87,7 +122,7 @@ function _createTodos() {
             reminder: new Date(Date.now())
         },
         {
-            _id: 't' + Date.now() % 10,
+            _id: utilService.makeId(),
             title: 'first todo',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),

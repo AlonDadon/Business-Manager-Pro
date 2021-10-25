@@ -5,7 +5,6 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import { todoService } from '../services/todo.service';
 import { TodoDragAndDropProps } from '../../../store/todo/interfaceTodo';
 
 
@@ -30,6 +29,7 @@ export const TodoDragAndDropActions: FC<TodoDragAndDropProps> =
                     justifyContent="center"
                     alignItems="center"
                     sx={{ mb: 2, mt: 2 }}>
+                 
                     <Grid item xs={1}>
                         <Item>
                             <Card onClick={() => handleOpenEdit(true)}>
@@ -44,6 +44,7 @@ export const TodoDragAndDropActions: FC<TodoDragAndDropProps> =
                             </Card>
                         </Item>
                     </Grid>
+
                     <Grid item xs={1} >
                         <Item>
                             <Card onDragOver={(ev) => onDragOver(ev)}
@@ -77,6 +78,7 @@ export const TodoDragAndDropActions: FC<TodoDragAndDropProps> =
                             </Card>
                         </Item>
                     </Grid>
+
                     <Grid item xs={1} >
                         <Item>
                             <Card>
@@ -92,6 +94,7 @@ export const TodoDragAndDropActions: FC<TodoDragAndDropProps> =
                         </Item>
                     </Grid>
                 </Grid>
+                
                 <hr />
             </section >
         )
