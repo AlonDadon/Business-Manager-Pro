@@ -1,14 +1,3 @@
-export interface ITodo {
-  _id?: string,
-  title: string,
-  txt: string,
-  isDone: boolean,
-  desc: string,
-  startTime: Date,
-  deadline: Date,
-  reminder: Date,
-  importance: Number
-}
 
 // export interface Store {
 //   todos: {
@@ -19,11 +8,13 @@ export interface ITodo {
 // }
 
 export interface Store {
-  todos: ITodo[],
+  // todos: ITodo[],
+  todos: any,
 }
 
 export interface todoListProps {
-  todos: ITodo[],
+  // todos: ITodo[],
+  todos: any,
   deleteTodo: Function,
   className: string,
   setTodoDragIdx: Function,
@@ -47,8 +38,9 @@ const REMOVE_TODO = "REMOVE_TODO";
 export type ActionTypes =
   // | { type: typeof SET_TODOS; payload: ITodo[] }
   | { type: typeof SET_TODOS; payload: any }
-  | { type: typeof ADD_TODO; payload: ITodo }
+  | { type: typeof ADD_TODO; payload: any }
+  // | { type: typeof ADD_TODO; payload: ITodo }
   | { type: typeof REMOVE_TODO; payload: string }
-  | { type: typeof UPDATE_TODO; payload: ITodo; }
+  | { type: typeof UPDATE_TODO; payload: any }
 //   | { type: typeof TOGGLE_TODO; payload: number }
 //   | { type: typeof SET_NEWTODO; payload: string };

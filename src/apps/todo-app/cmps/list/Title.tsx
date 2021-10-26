@@ -1,7 +1,8 @@
 import { Typography, InputBase } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
+import { ITitleProps } from '../../interfaces';
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: any) => ({
 }))
 
 
-export const Title = () => {
+export const Title: FC<ITitleProps> = ({title}) => {
     const [isOpen, setIsOpen] = useState<Boolean>(true)
     const toggleIsOpen = () => setIsOpen(true)
     // const toggleIsOpen = () => setIsOpen(!isOpen)
@@ -29,7 +30,7 @@ export const Title = () => {
     return (
         <>
             <InputBase
-                value={'Todo'}
+                value={title}
                 inputProps={{ className: classes.input }}
                 fullWidth
                 // autoFocus={true}

@@ -1,8 +1,8 @@
 
 import { localService } from '../../../service/storageService.js'
 import { storageService } from '../../../service/async-Storage.service'
-import { ITodo } from '../../../store/todo/interfaceTodo'
 import { utilService } from '../../../service/util.service.js'
+import { ITodo } from '../interfaces.js'
 // import { httpService } from './http.service'
 export const todoService = {
     getTodos,
@@ -71,10 +71,10 @@ async function remove(todoId: string) {
 
 function _createTodoList() {
     return {
-        lists: {
+        todoList: {
             'list-1': {
                 id: utilService.makeId(),
-                title: 'To Do',
+                title: 'To do',
                 todos: _createTodos()
             },
             // 'list-2': {
@@ -88,8 +88,7 @@ function _createTodoList() {
             //     todos: _createTodos()
             // },
         },
-        listIds: ['list-1']
-
+        todoListIds: ['list-1']
     }
 
 }
@@ -99,7 +98,7 @@ function _createTodos() {
     return [
         {
             _id: utilService.makeId(),
-            title: 'first todo',
+            title: 'Build todo app',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),
@@ -111,7 +110,7 @@ function _createTodos() {
         },
         {
             _id: utilService.makeId(),
-            title: 'first todo',
+            title: 'Send CV',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),
@@ -123,7 +122,7 @@ function _createTodos() {
         },
         {
             _id: utilService.makeId(),
-            title: 'first todo',
+            title: 'Grow to ninja level code',
             desc: 'first todo text text text',
             deadline: new Date(Date.now()),
             createAt: new Date(Date.now()),

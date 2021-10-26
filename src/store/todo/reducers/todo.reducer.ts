@@ -1,4 +1,6 @@
-import { ActionTypes, ITodo, Store } from "../interfaceTodo"
+import { ITodo } from "../../../apps/todo-app/interfaces";
+import { ActionTypes, Store } from "../interfaceTodo"
+
 
 //can be changed to whatever name.
 
@@ -16,7 +18,7 @@ export function todoReducer(state:any = initialState , action:ActionTypes) {
         // case 'ADD_TODO':
         //     return { ...state, todos: [...state.todos, action.payload] }
         // case 'REMOVE_TODO':
-        //     return { ...state, todos: state.todos.filter((todo:ITodo) => todo._id !== action.payload) }
+            // return { ...state, todos: state.todos.filter((todo:ITodo) => todo._id !== action.payload) }
         // case 'UPDATE_TODO':
         //     return {
         //         ...state,
